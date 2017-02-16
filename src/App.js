@@ -45,6 +45,7 @@ class App extends Component {
     this.setState({ isLoading: true })
 
     request.execute((response) => {
+			console.log(response);
       this.setState({
         isLoading: false,
         response
@@ -65,18 +66,42 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h2>Welcome to React</h2>
         </div>
-        <p className="App-intro">
-          {isLoading
-            ? "Loading..."
-            : null
-          }
 
-          {response
-            ? response.items.length
-            : null
-          }
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+				<div className='App-body'>
+					<p className="App-intro">
+	          {isLoading
+	            ? "Loading..."
+	            : null
+	          }
+
+	          {response
+	            ? response.items.length + " results returned"
+	            : null
+	          }
+					</p>
+
+					<div className='App-searchResults'>
+						{response ?
+								<div>
+									<div className='media'>
+										<div className='media-left'>
+											<a href='#'>
+												<img className='media-object' src={response.items[0].snippet.thumbnails.default.url} alt={response.items[0].snippet.title}/>
+											</a>
+										</div>
+										<div className='media-body'>
+											<h4 className='media-heading'>{response.items[0].snippet.title}</h4>
+											<h5 className='text-muted'>by {response.items[0].snippet.channelTitle}</h5>
+											<p>
+												{response.items[0].snippet.description}
+											</p>
+										</div>
+									</div>
+								</div>
+							: null
+						}
+					</div>
+				</div>
       </div>
     );
   }
