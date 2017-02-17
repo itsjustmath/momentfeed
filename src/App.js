@@ -6,7 +6,10 @@ class App extends Component {
 
   constructor(...args) {
     super(...args);
-    this.state = {};
+		this.state = {value: ''};
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   loadApi(gapi) {
@@ -51,13 +54,22 @@ class App extends Component {
     });
   }
 
+	handleChange(event) {
+    this.setState({value: event.target.value});
+  }
+
+  handleSubmit(event) {
+		console.log(this.state.value);
+    event.preventDefault();
+  }
+
   componentDidMount() {
     gapi.load('client', this.loadApi(gapi)) // eslint-disable-line no-undef
   }
 
   render() {
 
-    const { isLoading, response } = this.state;
+    const { isLoading, response, value } = this.state;
 
     return (
       <div className="App">
@@ -65,18 +77,18 @@ class App extends Component {
 					<div className='container'>
 						<img src={logo} className="App-logo" alt="logo" />
 						<h2 className='App-headerText'>YouTube Search Widget</h2>
-						<div className='App-searchForm'>
+						<form className='App-searchForm' onSubmit={this.handleSubmit}>
 							<div className='row'>
 								<div className='col-md-4 col-md-offset-4'>
 									<div className='input-group'>
-										<input type='text' className='form-control' placeholder='Search for videos...'/>
+										<input type='text' value={value} onChange={this.handleChange} className='form-control' placeholder='Search YouTube for videos...'/>
 										<span className='input-group-btn'>
-											<button className='btn btn-primary' type='button'>Go!</button>
+											<button className='btn btn-primary' type="submit" value="Submit">Search</button>
 										</span>
 									</div>
 								</div>
 							</div>
-						</div>
+			      </form>
 					</div>
         </div>
 
