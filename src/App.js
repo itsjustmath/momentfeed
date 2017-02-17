@@ -8,6 +8,7 @@ class App extends Component {
     super(...args);
 		this.state = {value: ''};
 
+		this.handleClick = this.handleClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -27,9 +28,6 @@ class App extends Component {
         });
         return Promise.resolve();
       })
-      .then(() => {
-        this.search("momentfeed");
-      })
     }
   }
 
@@ -46,7 +44,7 @@ class App extends Component {
     this.setState({ isLoading: true });
 
     request.execute((response) => {
-			// console.log(response);
+			console.log(response);
       this.setState({
         isLoading: false,
         response
@@ -54,12 +52,16 @@ class App extends Component {
     });
   }
 
-	handleChange(event) {
-    this.setState({value: event.target.value});
+	handleClick(e) {
+		this.search('Never Gonna Give You Up');
+	}
+
+	handleChange(e) {
+    this.setState({value: e.target.value});
   }
 
-  handleSubmit(event) {
-		console.log(this.state.value);
+  handleSubmit(e) {
+		this.search(this.state.value);
     event.preventDefault();
   }
 
@@ -68,18 +70,17 @@ class App extends Component {
   }
 
   render() {
-
     const { isLoading, response, value } = this.state;
 
     return (
       <div className="App">
         <div className="App-header">
 					<div className='container'>
-						<img src={logo} className="App-logo" alt="logo" />
+						<img src={logo} className="App-logo" alt="logo" onClick={this.handleClick} />
 						<h2 className='App-headerText'>YouTube Search Widget</h2>
 						<form className='App-searchForm' onSubmit={this.handleSubmit}>
 							<div className='row'>
-								<div className='col-md-4 col-md-offset-4'>
+								<div className='col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4'>
 									<div className='input-group'>
 										<input type='text' value={value} onChange={this.handleChange} className='form-control' placeholder='Search YouTube for videos...'/>
 										<span className='input-group-btn'>
@@ -96,41 +97,37 @@ class App extends Component {
 					<div className='container'>
 						<div className='row'>
 							<div className='col-md-8 col-md-offset-2'>
-								<p className='App-intro lead'>
-									{isLoading
-										? 'Loading...'
-										: null
-									}
-
-									{response
-										? 'Results returned for [QUERY]'
-										: null
-									}
-								</p>
-
+								{response ?
+									<div className='App-intro'>
+										{isLoading ?
+											<div>
+												<div className='loader'></div>
+											</div> : null
+										}
+									</div> : null
+								}
 								<div className='App-searchResults'>
 									{response ?
-											<div>
-												{response.items.map((items, index) => (
-													<div className='media' key={index}>
-														<div className='media-left'>
-															<a href={`https://www.youtube.com/watch?v=`+items.id.videoId} target='_blank' alt={items.snippet.title}>
-																<img className='media-object' src={items.snippet.thumbnails.default.url} alt={items.snippet.title}/>
-															</a>
-														</div>
-														<div className='media-body'>
-															<h4 className='media-heading'>
-																<a href={`https://www.youtube.com/watch?v=`+items.id.videoId} target="_blank" alt={items.snippet.title}>{items.snippet.title}</a>
-															</h4>
-															<h5 className='text-muted'>by {items.snippet.channelTitle}</h5>
-															<p>
-																{items.snippet.description}
-															</p>
-														</div>
+										<div>
+											{response.items.map((items, index) => (
+												<div className='media' key={index}>
+													<div className='media-left'>
+														<a href={`https://www.youtube.com/watch?v=`+items.id.videoId} target='_blank' alt={items.snippet.title}>
+															<img className='media-object' src={items.snippet.thumbnails.default.url} alt={items.snippet.title}/>
+														</a>
 													</div>
-												))}
-											</div>
-										: null
+													<div className='media-body'>
+														<h4 className='media-heading'>
+															<a href={`https://www.youtube.com/watch?v=`+items.id.videoId} target="_blank" alt={items.snippet.title}>{items.snippet.title}</a>
+														</h4>
+														<h5 className='text-muted'>by {items.snippet.channelTitle}</h5>
+														<p>
+															{items.snippet.description}
+														</p>
+													</div>
+												</div>
+											))}
+										</div> : null
 									}
 								</div>
 							</div>
