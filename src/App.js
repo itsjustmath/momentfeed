@@ -10,7 +10,7 @@ class App extends Component {
     super(...args);
 		this.state = {value: ''};
 
-		this.handleClick = this.handleClick.bind(this);
+    this.handleClick = this.handleClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -78,46 +78,46 @@ class App extends Component {
     return (
       <div className="App">
         <div className="App-header">
-					<div className='container'>
-						<img src={logo} className="App-logo" alt="logo" onClick={this.handleClick} />
-						<h2 className='App-headerText'>YouTube Search Widget</h2>
+          <div className='container'>
+            <img src={logo} className="App-logo" alt="logo" onClick={this.handleClick} />
+            <h2 className='App-headerText'>YouTube Search Widget</h2>
             <SearchForm
               value={value}
               handleSubmit={this.handleSubmit}
               handleChange={this.handleChange}
             />
-					</div>
+          </div>
         </div>
 
-				<div className='App-body'>
-					<div className='container'>
-						<div className='row'>
-							<div className='col-md-8 col-md-offset-2'>
-								{response ?
-									<div className='App-intro'>
-										{isLoading ?
-											<div>
-												<div className='loader'></div>
-											</div> : null
-										}
-									</div> : null
-								}
-								<div className='App-searchResults'>
-									{response ?
-										<div>
-											{response.items.map((items, index) => (
-												<MediaObject
+        <div className='App-body'>
+          <div className='container'>
+            <div className='row'>
+              <div className='col-md-8 col-md-offset-2'>
+                {response ?
+                  <div className='App-intro'>
+                    {isLoading ?
+                      <div>
+                        <div className='loader'></div>
+                      </div> : null
+                    }
+                  </div> : null
+                }
+                <div className='App-searchResults'>
+                  {response ?
+                    <div>
+                      {response.items.map((items, index) => (
+                        <MediaObject
                           items={items}
                           key={index}
                         />
-											))}
-										</div> : null
-									}
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
+                      ))}
+                    </div> : null
+                  }
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
