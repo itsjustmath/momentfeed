@@ -1,29 +1,33 @@
-## MomentFeed Code Project
-
-### YouTube Search Widget
+## YouTube Search Widget
 
 A small YouTube search application built in React.
 
-#### Requirements
+### Requirements
 
-- Node.js
+- Node.js >= 6.5.0
 
-#### Usage
+### Usage
 
-##### Local Development
+#### Local Development
+
+Installs dependencies and runs the app in the development mode, opens to: [http://localhost:3000](http://localhost:3000)
 
 ```
 npm start
 ```
 
-- Installs dependencies and runs the app in the development mode.<br>
-- Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+#### Testing
 
-##### Production
+Runs the test watcher in an interactive mode.
+
+```
+npm test
+```
+
+#### Production
+
+Builds the app for production to the `build` folder.
 
 ```
 npm run build
 ```
-
-- Builds the app for production to the `build` folder.<br>
-- It correctly bundles React in production mode and optimizes the build for the best performance.
