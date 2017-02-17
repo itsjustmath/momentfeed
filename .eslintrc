@@ -19,5 +19,8 @@
     "commonjs": true,
     "node": true
   },
+  "ecmaFeatures": {
+    "modules": true
+  },
   "extends": ["eslint:recommended"]
 }
