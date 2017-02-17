@@ -90,18 +90,18 @@ class App extends Component {
 					<div className='App-searchResults'>
 						{response ?
 								<div>
-									{response.items.map(() => (
+									{response.items.map((items) => (
 										<div className='media'>
 											<div className='media-left'>
 												<a href='#'>
-													<img className='media-object' src={response.items.snippet.thumbnails.default.url} alt={response.items.snippet.title}/>
+													<img className='media-object' src={items.snippet.thumbnails.default.url} alt={items.snippet.title}/>
 												</a>
 											</div>
 											<div className='media-body'>
-												<h4 className='media-heading'>{response.items.snippet.title}</h4>
-												<h5 className='text-muted'>by {response.items.snippet.channelTitle}</h5>
+												<h4 className='media-heading'>{items.snippet.title}</h4>
+												<h5 className='text-muted'>by {items.snippet.channelTitle}</h5>
 												<p>
-													{response.items.snippet.description}
+													{items.snippet.description}
 												</p>
 											</div>
 										</div>
