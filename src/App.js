@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import SearchForm from './components/SearchForm';
+import MediaObject from './components/MediaObject';
 import logo from './logo.png';
 import './App.css';
 
@@ -79,18 +81,11 @@ class App extends Component {
 					<div className='container'>
 						<img src={logo} className="App-logo" alt="logo" onClick={this.handleClick} />
 						<h2 className='App-headerText'>YouTube Search Widget</h2>
-						<form className='App-searchForm' onSubmit={this.handleSubmit}>
-							<div className='row'>
-								<div className='col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3'>
-									<div className='input-group'>
-										<input type='text' value={value} onChange={this.handleChange} className='form-control' placeholder='Search YouTube for videos...'/>
-										<span className='input-group-btn'>
-											<button className='btn btn-primary' type="submit" value="Submit">Search</button>
-										</span>
-									</div>
-								</div>
-							</div>
-			      </form>
+            <SearchForm
+              value={value}
+              handleSubmit={this.handleSubmit}
+              handleChange={this.handleChange}
+            />
 					</div>
         </div>
 
@@ -111,22 +106,10 @@ class App extends Component {
 									{response ?
 										<div>
 											{response.items.map((items, index) => (
-												<div className='media' key={index}>
-													<div className='media-left'>
-														<a href={`https://www.youtube.com/watch?v=`+items.id.videoId} target='_blank' alt={items.snippet.title}>
-															<img className='media-object' src={items.snippet.thumbnails.default.url} alt={items.snippet.title}/>
-														</a>
-													</div>
-													<div className='media-body'>
-														<h4 className='media-heading'>
-															<a href={`https://www.youtube.com/watch?v=`+items.id.videoId} target="_blank" alt={items.snippet.title}>{items.snippet.title}</a>
-														</h4>
-														<h5 className='text-muted'>by {items.snippet.channelTitle}</h5>
-														<p>
-															{items.snippet.description}
-														</p>
-													</div>
-												</div>
+												<MediaObject
+                          items={items}
+                          key={index}
+                        />
 											))}
 										</div> : null
 									}
