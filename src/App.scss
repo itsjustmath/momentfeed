@@ -1,9 +1,15 @@
+// -------------------------
 // Variables
+// -------------------------
+
 $gray: #424242;
 $dark-gray: #333;
 $blue: #00aced;
 
+// -------------------------
 // Global Styles
+// -------------------------
+
 body {
 	color: $dark-gray;
   margin: 0;
@@ -15,7 +21,11 @@ a {
 	color: $blue;
 }
 
+
+// -------------------------
 // App Styles
+// -------------------------
+
 .App-body {
 	padding-top: 20px;
 	padding-bottom: 20px;
@@ -38,15 +48,15 @@ a {
 
 .App-intro {
   font-size: 1.4em;
+  border-bottom: 1px dotted rgba($gray, .07);
+  padding-bottom: 10px;
 	margin-bottom: 20px;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
+// -------------------------
 // Media Object
+// -------------------------
+
 .media {
 	border-bottom: 1px solid rgba($gray, .1);
 	padding-bottom: 20px;
@@ -55,7 +65,11 @@ a {
 	&:last-child { border-bottom: 0; }
 }
 
+
+// -------------------------
 // Responsive Styles
+// -------------------------
+
 @media (max-width: 400px) {
 	.media-left {
 		display: block;
