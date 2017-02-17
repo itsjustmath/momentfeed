@@ -1,8 +1,7 @@
 ## Code Project
 
-The purpose of the exercise is to better understand your ability to research and implement a simple web page. As we are
-looking for someone with heavy UX/UI **background the presentation of the page and style and format of the code will be
-very important**.
+- The purpose of the exercise is to better understand your ability to research and implement a simple web page.
+- As we are looking for someone with heavy UX/UI **background the presentation of the page and style and format of the code will be very important**.
 
 ### Output:
 - 1 HTML page with embedded javascript and CSS displaying results of an API request
@@ -14,6 +13,15 @@ very important**.
 #### Bonus
 - JS Bonus points: Use angular.js (version 1 or 2) , react.js or other javascript framework
 - CSS Bonus points: Use bootstrap css, sass etc..
+
+## TODO
+
+- [ ] install eslint  / make semicolons consistent!
+- [ ] make quotes consistent
+
+### Nice to haves
+
+- [ ] cool opening transition
 
 ---
 
