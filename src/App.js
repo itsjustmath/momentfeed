@@ -65,7 +65,7 @@ class App extends Component {
 
   handleSubmit(e) {
 		this.search(this.state.value);
-    event.preventDefault();
+    e.preventDefault();
   }
 
   componentDidMount() {
