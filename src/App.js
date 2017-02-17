@@ -16,7 +16,7 @@ class App extends Component {
   loadApi(gapi) {
     return () => {
       gapi.client.init({
-        apiKey: "AIzaSyD1yWAAWAIXxCkwFyiB64k2sIutXNg978Y"
+        apiKey: 'AIzaSyD1yWAAWAIXxCkwFyiB64k2sIutXNg978Y'
       })
       .then(() => {
         return gapi.client.load('youtube', 'v3');
@@ -38,13 +38,13 @@ class App extends Component {
 
     const request = gapi.client.youtube.search.list({
       q: query,
-      part: 'snippet'
+      part: 'snippet',
+			type: 'video'
     });
 
     this.setState({ isLoading: true });
 
     request.execute((response) => {
-			console.log(response);
       this.setState({
         isLoading: false,
         response
@@ -54,6 +54,7 @@ class App extends Component {
 
 	handleClick(e) {
 		this.search('Never Gonna Give You Up');
+		this.setState({value: ''});
 	}
 
 	handleChange(e) {
@@ -80,7 +81,7 @@ class App extends Component {
 						<h2 className='App-headerText'>YouTube Search Widget</h2>
 						<form className='App-searchForm' onSubmit={this.handleSubmit}>
 							<div className='row'>
-								<div className='col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4'>
+								<div className='col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3'>
 									<div className='input-group'>
 										<input type='text' value={value} onChange={this.handleChange} className='form-control' placeholder='Search YouTube for videos...'/>
 										<span className='input-group-btn'>
