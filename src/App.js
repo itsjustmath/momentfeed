@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import logo from './logo.png';
 import './App.css';
 
 class App extends Component {
 
   constructor(...args) {
-    super(...args)
-    this.state = {}
+    super(...args);
+    this.state = {};
   }
 
   loadApi(gapi) {
@@ -15,17 +15,17 @@ class App extends Component {
         apiKey: "AIzaSyD1yWAAWAIXxCkwFyiB64k2sIutXNg978Y"
       })
       .then(() => {
-        return gapi.client.load('youtube', 'v3')
+        return gapi.client.load('youtube', 'v3');
       })
       .then(() => {
         this.setState({
           gapi,
           isLoaded: true
-        })
+        });
         return Promise.resolve();
       })
       .then(() => {
-        this.search("javascript");
+        this.search("momentfeed");
       })
     }
   }
@@ -40,14 +40,14 @@ class App extends Component {
       part: 'snippet'
     });
 
-    this.setState({ isLoading: true })
+    this.setState({ isLoading: true });
 
     request.execute((response) => {
-			console.log(response);
+			// console.log(response);
       this.setState({
         isLoading: false,
         response
-      })
+      });
     });
   }
 
@@ -56,6 +56,7 @@ class App extends Component {
   }
 
   render() {
+
     const { isLoading, response } = this.state;
 
     return (
@@ -63,52 +64,65 @@ class App extends Component {
         <div className="App-header">
 					<div className='container'>
 						<img src={logo} className="App-logo" alt="logo" />
-						<h2>YouTube Search</h2>
-
+						<h2 className='App-headerText'>YouTube Search Widget</h2>
 						<div className='App-searchForm'>
-							<div className='form-group'>
-								<input type='text' className='form-control' placeholder='Search'/>
+							<div className='row'>
+								<div className='col-md-4 col-md-offset-4'>
+									<div className='input-group'>
+										<input type='text' className='form-control' placeholder='Search for videos...'/>
+										<span className='input-group-btn'>
+											<button className='btn btn-primary' type='button'>Go!</button>
+										</span>
+									</div>
+								</div>
 							</div>
-							<button type='submit' className='btn btn-default'>Submit</button>
 						</div>
 					</div>
         </div>
 
 				<div className='App-body'>
-					<p className="App-intro">
-	          {isLoading
-	            ? "Loading..."
-	            : null
-	          }
+					<div className='container'>
+						<div className='row'>
+							<div className='col-md-8 col-md-offset-2'>
+								<p className='App-intro lead'>
+									{isLoading
+										? 'Loading...'
+										: null
+									}
 
-	          {response
-	            ? response.items.length + " results returned"
-	            : null
-	          }
-					</p>
+									{response
+										? 'Results returned for [QUERY]'
+										: null
+									}
+								</p>
 
-					<div className='App-searchResults'>
-						{response ?
-								<div>
-									{response.items.map((items) => (
-										<div className='media'>
-											<div className='media-left'>
-												<a href='#'>
-													<img className='media-object' src={items.snippet.thumbnails.default.url} alt={items.snippet.title}/>
-												</a>
+								<div className='App-searchResults'>
+									{response ?
+											<div>
+												{response.items.map((items, index) => (
+													<div className='media' key={index}>
+														<div className='media-left'>
+															<a href={`https://www.youtube.com/watch?v=`+items.id.videoId} target='_blank' alt={items.snippet.title}>
+																<img className='media-object' src={items.snippet.thumbnails.default.url} alt={items.snippet.title}/>
+															</a>
+														</div>
+														<div className='media-body'>
+															<h4 className='media-heading'>
+																<a href={`https://www.youtube.com/watch?v=`+items.id.videoId} target="_blank" alt={items.snippet.title}>{items.snippet.title}</a>
+															</h4>
+															<h5 className='text-muted'>by {items.snippet.channelTitle}</h5>
+															<p>
+																{items.snippet.description}
+															</p>
+														</div>
+													</div>
+												))}
 											</div>
-											<div className='media-body'>
-												<h4 className='media-heading'>{items.snippet.title}</h4>
-												<h5 className='text-muted'>by {items.snippet.channelTitle}</h5>
-												<p>
-													{items.snippet.description}
-												</p>
-											</div>
-										</div>
-									))}
+										: null
+									}
 								</div>
-							: null
-						}
+							</div>
+						</div>
 					</div>
 				</div>
       </div>
